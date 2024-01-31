@@ -1,0 +1,67 @@
+# serverless.yml
+
+service: serverless-rekognition
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  stage: epsi
+  region: eu-central-1
+  apiKeys:
+    - apikey-epsi
+
+functions:
+  generateSignedUrl:
+    handler: index.handler
+    events:
+      - http: 
+          path: /generate-signed-url
+          method: POST 
+          private: true
+    request:
+      contentHandling: CONVERT_TO_TEXT
+    response:
+      contentHandling: CONVERT_TO_TEXT
+  hello:
+    handler: index.handler
+    events:
+      - http: 
+          path:  /
+          method: ANY
+          private: true
+    request:
+      contentHandling: CONVERT_TO_TEXT
+    response:
+      contentHandling: CONVERT_TO_TEXT
+  upload:
+    handler: index.handler
+    events:
+      - http: 
+          path: /detect-labels/{filename}
+          method: GET 
+          private: true
+    request:
+      contentHandling: CONVERT_TO_BINARY
+    response:
+      contentHandling: CONVERT_TO_TEXT
+
+custom:
+  documentation:
+    version: '1'
+    title: 'My API'
+    description: 'This is my API'
+    models: {}
+  apiKeys:
+    - name: apikey-epsi
+      usagePlan:
+        name: "usageplan-rekognition"
+        quota:
+          limit: 1000
+          period: MONTH
+        throttle:
+          burstLimit: 100
+          rateLimit: 20
+plugins:
+  - serverless-offline
+  - serverless-add-api-key
+  - serverless-openapi

@@ -1,0 +1,26 @@
+{
+  "name": "serverless-rekognition",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "aws-sdk": "^2.865.0",
+    "aws-serverless-express": "^3.4.0",
+    "connect-busboy": "^0.0.2",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "serverless-http": "^2.7.0",
+    "uuid": "^8.3.2"
+  },
+  "scripts": {
+    "deploy": "AWS_PROFILE=perso sls deploy"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "serverless-add-api-key": "^4.2.0",
+    "serverless-offline": "^6.8.0",
+    "serverless-openapi": "^1.1.2"
+  }
+}
